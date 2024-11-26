@@ -2,6 +2,10 @@ const { createServer } = require('node:http');
 var dt = require("./myfirstmodule")
 var url = require('node:url');
 var fs = require('fs');
+var serverModule = require("./Users")
+var serverClass = serverModule.Server
+var userClass = serverModule.User
+var Server = new serverClass()
 
 const hostname = '127.0.0.1';
 const port = 3000;
@@ -14,7 +18,7 @@ const server = createServer((req, res) => {
   // res.write(text)
   fs.readFile('test.html', function(err, data) {
     res.writeHead(200, {'Content-Type': 'text/html'});
-    res.write(data);
+    res.write(data + " " + Server.Users);
     return res.end();
   });
 });
